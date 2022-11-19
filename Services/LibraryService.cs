@@ -20,14 +20,14 @@ namespace library_cms.Services
             new Library{Title = "Beloved", Author = "Master"}
         };
 
-        public ServiceResponse<List<GetLibraryDto>> getBooks()
+        public async Task<ServiceResponse<List<GetLibraryDto>>> getBooks()
         {
             return new ServiceResponse<List<GetLibraryDto>>()
             {
                 Data = Library.Select(c => _mapper.Map<GetLibraryDto>(c)).ToList()
             };
         }
-        public ServiceResponse<GetLibraryDto> getOne(int id)
+        public async Task<ServiceResponse<GetLibraryDto>> getOne(int id)
         {
             var response = new ServiceResponse<GetLibraryDto>();
             var character = Library.FirstOrDefault(c => c.id == id);

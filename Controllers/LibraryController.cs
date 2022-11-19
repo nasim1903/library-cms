@@ -19,15 +19,15 @@ namespace library_cms.Controllers
             
         }
         [HttpGet]
-        public ActionResult<ServiceResponse<GetLibraryDto>> GetResult()
+        public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> GetResult()
         {
-            return Ok(_libraryService.getBooks());
+            return Ok (await _libraryService.getBooks());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ServiceResponse<GetLibraryDto>> getSingle(int id)
+        public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> getSingle(int id)
         {
-            return Ok(_libraryService.getOne(id));
+            return Ok(await _libraryService.getOne(id));
         }
     }
 }
