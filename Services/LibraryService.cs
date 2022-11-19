@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using library_cms.Dtos;
 
 namespace library_cms.Services
 {
@@ -13,12 +14,12 @@ namespace library_cms.Services
             new Library{Title = "Beloved", Author = "Master"}
         };
 
-        public List<Library> getBooks()
+        public List<GetLibraryDto> getBooks()
         {
             return Library;
         }
 
-        public Library getOne(int id)
+        public GetLibraryDto getOne(int id)
         {
             return Library.FirstOrDefault(c => c.id == id);
    
