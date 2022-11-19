@@ -19,13 +19,13 @@ namespace library_cms.Controllers
             
         }
         [HttpGet]
-        public ActionResult<GetLibraryDto> GetResult()
+        public ActionResult<ServiceResponse<GetLibraryDto>> GetResult()
         {
             return Ok(_libraryService.getBooks());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<GetLibraryDto> getSingle(int id)
+        public ActionResult<ServiceResponse<GetLibraryDto>> getSingle(int id)
         {
             return Ok(_libraryService.getOne(id));
         }
