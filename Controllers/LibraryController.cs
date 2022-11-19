@@ -16,12 +16,12 @@ namespace library_cms.Controllers
         public LibraryController(iLibraryService libraryService)
         {
             _libraryService = libraryService;
-            
+
         }
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> GetResult()
         {
-            return Ok (await _libraryService.getBooks());
+            return Ok(await _libraryService.getBooks());
         }
 
         [HttpGet("{id}")]
@@ -34,10 +34,28 @@ namespace library_cms.Controllers
         {
             return Ok(await _libraryService.addBooks(newBook));
         }
-        [HttpPut()]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> UpdateBook(UpdateLibraryDto updateBook, int id)
         {
-            return Ok(await _libraryService.updateBook(updateBook, id));
+            var response = await _libraryService.updateBook(updateBook, id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<ServiceResponse<List<GetLibraryDto>>>> DeleteBook(int id)
+        {
+            var response = await _libraryService.deleteBook(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
+        }
+
+
     }
 }

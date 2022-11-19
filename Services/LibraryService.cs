@@ -32,7 +32,7 @@ namespace library_cms.Services
             var response = new ServiceResponse<GetLibraryDto>();
             var book = Library.FirstOrDefault(c => c.id == id);
             response.Data = _mapper.Map<GetLibraryDto>(book);
-            return response;       
+            return response;
         }
 
         public async Task<ServiceResponse<List<GetLibraryDto>>> addBooks(AddLibraryDto newBook)
@@ -46,10 +46,31 @@ namespace library_cms.Services
 
         public async Task<ServiceResponse<GetLibraryDto>> updateBook(UpdateLibraryDto updateBook, int id)
         {
-            var response = new ServiceResponse<GetLibraryDto>();
+            var serviceResponse = new ServiceResponse<GetLibraryDto>();
             var book = Library.FirstOrDefault(c => c.id == id);
-            _mapper.Map(updateBook, book);
-            response.Data = _mapper.Map<GetLibraryDto>(book);
+
+            try
+            {
+                _mapper.Map(updateBook, book);
+
+                serviceResponse.Data = _mapper.Map<GetLibraryDto>(book);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<List<GetLibraryDto>>> deleteBook(int id)
+        {
+            var response = new ServiceResponse<List<GetLibraryDto>>();
+            var book = Library.FirstOrDefault(c => c.id == id);
+            Library.Remove(book);
+
+            response.Data = Library.Select(c => _mapper.Map<GetLibraryDto>(c)).ToList();
             return response;
         }
     }

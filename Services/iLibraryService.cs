@@ -12,5 +12,6 @@ namespace library_cms.Services
         Task<ServiceResponse<List<GetLibraryDto>>> addBooks(AddLibraryDto newBook);
         Task<ServiceResponse<GetLibraryDto>> getOne(int id);
         Task<ServiceResponse<GetLibraryDto>> updateBook(UpdateLibraryDto updateBook, int id);
+        Task<ServiceResponse<List<GetLibraryDto>>> deleteBook(int id);
     }
 }
