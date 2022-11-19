@@ -34,5 +34,10 @@ namespace library_cms.Controllers
         {
             return Ok(await _libraryService.addBooks(newBook));
         }
+        [HttpPut()]
+        public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> UpdateBook(UpdateLibraryDto updateBook, int id)
+        {
+            return Ok(await _libraryService.updateBook(updateBook, id));
+        }
     }
 }

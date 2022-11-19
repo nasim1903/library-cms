@@ -13,6 +13,7 @@ namespace library_cms
         {
             CreateMap<Library, GetLibraryDto>();
             CreateMap<AddLibraryDto, Library>();
+            CreateMap<UpdateLibraryDto, Library>();
         }
     }
 }
