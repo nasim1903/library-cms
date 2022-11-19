@@ -34,5 +34,14 @@ namespace library_cms.Services
             response.Data = _mapper.Map<GetLibraryDto>(character);
             return response;       
         }
+
+        public async Task<ServiceResponse<List<GetLibraryDto>>> addBooks(AddLibraryDto newBook)
+        {
+            var response = new ServiceResponse<List<GetLibraryDto>>();
+            var book = _mapper.Map<Library>(newBook);
+            Library.Add(book);
+            response.Data = Library.Select(c => _mapper.Map<GetLibraryDto>(c)).ToList();
+            return response;
+        }
     }
 }

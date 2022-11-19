@@ -12,6 +12,7 @@ namespace library_cms
         public AutoMapperProfile()
         {
             CreateMap<Library, GetLibraryDto>();
+            CreateMap<AddLibraryDto, Library>();
         }
     }
 }

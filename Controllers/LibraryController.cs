@@ -29,5 +29,10 @@ namespace library_cms.Controllers
         {
             return Ok(await _libraryService.getOne(id));
         }
+        [HttpPost()]
+        public async Task<ActionResult<ServiceResponse<GetLibraryDto>>> AddBook(AddLibraryDto newBook)
+        {
+            return Ok(await _libraryService.addBooks(newBook));
+        }
     }
 }
