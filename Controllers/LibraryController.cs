@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using library_cms.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace library_cms.Controllers
@@ -10,13 +11,22 @@ namespace library_cms.Controllers
     [Route("[controller]")]
     public class LibraryController : ControllerBase
     {
-        private static List<Library> Library = new List<Library> {
-            new Library(),
-        };
-        [HttpGet("get")]
+        private readonly iLibraryService _libraryService;
+        public LibraryController(iLibraryService libraryService)
+        {
+            _libraryService = libraryService;
+            
+        }
+        [HttpGet]
         public ActionResult<Library> GetResult()
         {
-            return Ok(Library);
+            return Ok(_libraryService.getBooks());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Library> getSingle(int id)
+        {
+            return Ok(_libraryService.getOne(id));
         }
     }
 }
